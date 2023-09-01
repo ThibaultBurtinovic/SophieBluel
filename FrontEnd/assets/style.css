@@ -125,6 +125,48 @@ li:hover {
 	text-align: center;
 	margin-bottom: 1em;
 }
+
+.buttonAll{ 
+	display: flex;
+	justify-content: center;
+	column-gap: 10px;
+	margin-bottom: 50px;
+}
+
+.buttonAll button{
+	border: 1px solid #1D6154;
+	background-color: none;
+	font-family: 'Syne';
+	color: #1D6154;
+	font-weight: 700;
+	font-size: 16px;
+	border-radius: 60px;
+	height: 37px;
+	cursor: pointer;
+	padding: 0;
+}
+
+
+
+.Tous{
+	width: 100px;
+}
+
+.Objets{
+	width: 100px;
+}
+
+.Appartements{
+	width: 157px;
+}
+
+.HotelsRestaurants{
+	width: 198px;
+}
+
+
+
+
 .gallery {
 	width: 100%;
 	display: grid;
