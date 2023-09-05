@@ -2,7 +2,7 @@ const apiUrl = "http://localhost:5678/api/works";
 
 // Utilisation de la fonction fetch pour récupérer des données
 fetch(apiUrl)
-  .then(response => {
+  .then((response) => {
     // Vérification de la réponse HTTP
     if (!response.ok) {
       throw new Error(`Erreur HTTP! Statut : ${response.status}`);
@@ -10,31 +10,29 @@ fetch(apiUrl)
     // Conversion de la réponse en JSON
     return response.json();
   })
-  //appel functions 
-  .then(data => {
-    addImg(data); 
-    Filtres(data); 
-  })
-
-
+  //appel functions
+  .then((data) => {
+    addImg(data);
+    createFiltres(data);
+    styleButton(data);
+  });
 
 //Function add data (img et texte)
-function addImg(data){
-
+function addImg(data) {
   for (let i = 0; i < data.length; i++) {
+    const imageUrl = data[i].imageUrl;
+    const title = data[i].title;
+    const categoryId = data[i].category.id;
 
-  const imageUrl = data[i].imageUrl;
-  const title = data[i].title;
-  
+    const figureElement = document.createElement("figure");
+    figureElement.classList.add("visible");
+    figureElement.dataset.categoryId = categoryId;
+    const imgElement = document.createElement("img");
+    imgElement.src = imageUrl;
+    const figcaptionElement = document.createElement("figcaption");
+    figcaptionElement.innerText = title;
 
-  const figureElement = document.createElement("figure");
-  const imgElement = document.createElement("img");
-  imgElement.src = imageUrl;
-  const figcaptionElement = document.createElement("figcaption");
-  figcaptionElement.innerText = title;
-
-
-  const galleryArticle = document.querySelector(".gallery");
+    const galleryArticle = document.querySelector(".gallery");
     galleryArticle.appendChild(figureElement);
     figureElement.appendChild(imgElement);
     figureElement.appendChild(figcaptionElement);
@@ -42,57 +40,51 @@ function addImg(data){
 }
 
 // Création des filtres
-function Filtres(data){
-  let btnFinal = 0
-  let tag = 0
+function createFiltres(data) {
+  // Récupérez les boutons de filtre et les éléments de figure
+  const filtres = document.querySelectorAll("button");
+  const figures = document.querySelectorAll(".visible");
 
-
-  let listButton = document.querySelectorAll("button");
-
-  for (let i = 0; i < listButton.length; i++){
-      let btnFocus = listButton[i]
-  
-      btnFocus.addEventListener("click", (event) => {
-          btnFinal = event.target
-
-          let figures = document.querySelectorAll("figure");
-          for(let figure of figures){
-            
-            for (let i = 0; i < data.length; i++){
-              tag = data[i].categoryId;
-            
-             if(tag === btnFinal.id)
-             figure.style.display = "block";
-             console.log(btnFinal)
-             console.log(tag)
-              }
-            }
-      })
-
-
-
-  // Visuel Boutons
-      let Actif = false
-      btnFocus.addEventListener("click", function() {
-          if (!Actif) {
-              btnFocus.style.backgroundColor = "#1D6154";
-              btnFocus.style.color = "#FFFF";
-              Actif = true;
-          } else {
-              btnFocus.style.backgroundColor = "";
-              btnFocus.style.color = "#1D6154";
-              Actif = false;
-          }
+  // événement click
+  filtres.forEach((filtre) => {
+    filtre.addEventListener("click", () => {
+      const filtreId = filtre.getAttribute("id");
+      // Affichez éléments des filtres sélectionnés et masquer les autres
+      figures.forEach((figure) => {
+        const figureId = figure.getAttribute("data-category-id");
+        if (figureId === filtreId) {
+          figure.classList.replace("visible", "visible");
+          figure.classList.replace("hide", "visible");
+        } else if (filtreId === "0") {
+          figure.classList.replace("hide", "visible");
+        } else {
+          figure.classList.replace("visible", "hide");
+        }
       });
-  }
-  
- 
-
-
-
+    });
+  });
 }
 
+function styleButton(data) {
+  const buttons = document.querySelectorAll("button");
+
+  buttons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const buttonId = button.getAttribute("class");
 
 
-  
+      // Réinitialiser tous les boutons actifs
+      buttons.forEach((btn) => {
+        const btnClass = btn.getAttribute("class");
+        if (btnClass && btnClass.includes("Green")) { // Vérifiez que btnClass n'est pas null 
+          btn.classList.replace(btnClass, btnClass.replace("Green", ""));
+        }
+      });
 
+      // Ajouter la classe "Green" 
+      if (buttonId && !buttonId.includes("Green")) { // Vérifiez que buttonId n'est pas null 
+        button.classList.replace(buttonId, buttonId + "Green");
+      }
+    });
+  });
+}

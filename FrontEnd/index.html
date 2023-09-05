@@ -9,17 +9,28 @@
 	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
 	<meta name="description" content="">
 	<script defer src="script.js"></script>
-	<script defer src="filtres.js"></script>
+	<script defer src="logIndex.js"></script>
 	<link rel="stylesheet" href="./assets/style.css">
 </head>
 <body>
+	<!-- Bandeau édition -->
+	<div class="edit" id="hideEdit">
+		<div class="editText">
+			<img src="./assets/icons/noun-edit-6047259.png" alt="edit">
+			<p>Mode édition</p>
+		</div>
+		<button>publier les changements</button>
+	</div>
+
+
 <header>
-	<h1>Sophie Bluel <span>Architecte d'inteérieur</span></h1>
+	<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
 	<nav>
 		<ul>
 			<li>projets</li>
 			<li>contact</li>
-			<li>login</li>
+			<a href="login.html" class="log"><li>login</li></a>
+			<a href="#" class="hideLog" id="logOut"><li>logout</li></a>
 			<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
 		</ul>
 	</nav>
@@ -27,7 +38,13 @@
 <main>
 	<section id="introduction">
 		<figure>
-			<img src="./assets/images/sophie-bluel.png" alt="">
+			<img class="imgIntro" src="./assets/images/sophie-bluel.png" alt="">
+			<!-- modifier -->
+			<div class="otherEdit" id="hideEdit">
+				<img src="./assets/icons/noun-edit-6047259.png" alt="edit">
+				<p>modifier</p>
+			</div>
+
 		</figure>
 		<article>
 			<h2>Designer d'espace</h2>
@@ -36,10 +53,20 @@
 			<p>En cas de besoin, une équipe pluridisciplinaire peut-être constituée : architecte DPLG, décorateur(trice)</p>
 		</article>
 	</section>
+
 	<section id="portfolio">
-		<h2>Mes Projets</h2>
+
+		<div class="projectTitle">
+			<h2>Mes Projets</h2>
+		<!-- modifier -->
+			<div class="otherEditProject" id="hideEdit">
+				<img src="./assets/icons/noun-edit-6047259.png" alt="edit">
+				<p>modifier</p>
+			</div>
+		</div>
+		
 		<!-- Button Filtre -->
-		<div class="buttonAll">
+		<div class="classiqueButton">
 			<button class="Tous" id="0">Tous</button>
 			<button class="Objets" id="1">Objets</button>
 			<button class="Appartements" id="2">Appartements</button>
