@@ -42,7 +42,7 @@ function addImg(data) {
 // Création des filtres
 function createFiltres(data) {
   // Récupérez les boutons de filtre et les éléments de figure
-  const filtres = document.querySelectorAll("button");
+  const filtres = document.querySelectorAll(".classiqueButton button");
   const figures = document.querySelectorAll(".visible");
 
   // événement click
@@ -66,8 +66,7 @@ function createFiltres(data) {
 }
 
 function styleButton(data) {
-  const buttons = document.querySelectorAll("button");
-
+  const buttons = document.querySelectorAll(".classiqueButton button");
   buttons.forEach((button) => {
     button.addEventListener("click", () => {
       const buttonId = button.getAttribute("class");

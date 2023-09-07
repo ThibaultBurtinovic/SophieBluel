@@ -10,6 +10,7 @@
 	<meta name="description" content="">
 	<script defer src="script.js"></script>
 	<script defer src="logIndex.js"></script>
+	<script defer src="modal.js "></script>
 	<link rel="stylesheet" href="./assets/style.css">
 </head>
 <body>
@@ -61,7 +62,7 @@
 		<!-- modifier -->
 			<div class="otherEditProject" id="hideEdit">
 				<img src="./assets/icons/noun-edit-6047259.png" alt="edit">
-				<p>modifier</p>
+				<a href="#modal1"><button class="btnModif">modifier</button></a>
 			</div>
 		</div>
 		
@@ -102,5 +103,72 @@
 		</ul>
 	</nav>
 </footer>
+
+
+<aside id="modal1" class="hideModal" aria-hidden="true" role="gestion" aria-labelledby="titlemodal">
+	<div class="modalWrapper">
+			<a href="#" class="croix"><img src="./assets/icons/noun-x-2222031.png" alt="x"></a>
+			<div class="elementsModal">
+				<h2 class="h2Modal1">Galerie photo</h2>
+
+				<div class="galleryModal">
+				<!-- figures -->
+				</div>
+				
+				<button class="btnAdd">Ajouter une photo</button>
+		    </div>
+	</div>
+</aside>
+
+
+<aside id="modal2" class="hideModal2" aria-hidden="true" role="gestion" aria-labelledby="titlemodal">
+	<div class="modalWrapper2">
+
+		<div class="iconesModal2">
+		<a href="#" class="fleche"><img src="./assets/icons/Vector.png" alt="x"></a>	
+		<a href="#" class="croix2"><img src="./assets/icons/xmark.png" alt="x"></a>
+		</div>
+
+		<div class="elementsModal">
+			<h2 class="h2Modal2">Ajout photo</h2>
+
+			<div class="addModal">
+				<img class="iconeAdd" src="./assets/icons/picture-svgrepo-com 1.png" alt="">
+				<!-- Input img  -->
+				<input type="file" id="fileInput" accept="image/*" style="display: none;">
+				<button class="NewPic" id="addNewPic">+ Ajouter photo</button>
+				<div id="imageContainer" style="display: none;">
+					<img id="uploadedImage" src="#" alt="Image sélectionnée">
+				</div>
+
+				<p class="pAdd">jpg,png: 4mo max</p>
+			</div>
+			
+			<div class="inputAll">
+				<div class="inputModal2">
+					<label for="name">Titre</label>
+          			<input type="text" name="Titre" id="titrePhoto" />
+				</div>
+
+				<div class="inputModal2">
+		  			<label for="name" >Catégorie</label>
+          			<select id="choix" name="choix">
+						<option value="0"></option>
+  						<option value="1">Objets</option>
+  						<option value="2">Appartements</option>
+  						<option value="3">Hôtels & Restaurants</option>
+					</select>
+				</div>
+			</div>
+
+		  <button class="btnVal">Valider</button>
+		</div>
+		
+	</div>
+</aside>
+
+
+
 </body>
 </html>
+

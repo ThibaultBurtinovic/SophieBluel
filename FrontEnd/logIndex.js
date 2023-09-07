@@ -39,7 +39,7 @@ function logOut() {
 
     // Sup le token d'identification si click sur "logout"
     const logOutElement = document.getElementById("logOut");
-    logOutElement.addEventListener("click", function(event) {
+    logOutElement.addEventListener("click", function() {
         sessionStorage.removeItem("token");
         window.location.href = "index.html";
     });
@@ -66,4 +66,4 @@ function enableEditMode() {
     });
 }
 
-
+ 
