@@ -1,5 +1,3 @@
-const apiUrl = "http://localhost:5678/api/works";
-
 // Utilisation de la fonction fetch pour récupérer des données
 fetch(apiUrl)
   .then((response) => {
@@ -68,7 +66,7 @@ function createFiltres(data) {
 function styleButton(data) {
   const buttons = document.querySelectorAll(".classiqueButton button");
   buttons.forEach((button) => {
-    button.addEventListener("click", () => {
+    button.addEventListener("click", (event) => {
       const buttonId = button.getAttribute("class");
 
 
@@ -86,4 +84,4 @@ function styleButton(data) {
       }
     });
   });
-}
+} 

@@ -8,6 +8,7 @@
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
 	<meta name="description" content="">
+	<script defer src="config.js"></script>
 	<script defer src="script.js"></script>
 	<script defer src="logIndex.js"></script>
 	<script defer src="modal.js "></script>
@@ -106,6 +107,7 @@
 
 
 <aside id="modal1" class="hideModal" aria-hidden="true" role="gestion" aria-labelledby="titlemodal">
+	<div class="backgroundClose"></div>
 	<div class="modalWrapper">
 			<a href="#" class="croix"><img src="./assets/icons/noun-x-2222031.png" alt="x"></a>
 			<div class="elementsModal">
@@ -123,30 +125,34 @@
 
 <aside id="modal2" class="hideModal2" aria-hidden="true" role="gestion" aria-labelledby="titlemodal">
 	<div class="modalWrapper2">
-
+		<div class="backgroundClose"></div>
 		<div class="iconesModal2">
 		<a href="#" class="fleche"><img src="./assets/icons/Vector.png" alt="x"></a>	
 		<a href="#" class="croix2"><img src="./assets/icons/xmark.png" alt="x"></a>
 		</div>
 
-		<div class="elementsModal">
+		<form method="post" class="elementsModal" id="formAdd">
 			<h2 class="h2Modal2">Ajout photo</h2>
 
 			<div class="addModal">
-				<img class="iconeAdd" src="./assets/icons/picture-svgrepo-com 1.png" alt="">
-				<!-- Input img  -->
-				<input type="file" id="fileInput" accept="image/*" style="display: none;">
-				<button class="NewPic" id="addNewPic">+ Ajouter photo</button>
-				<div id="imageContainer" style="display: none;">
-					<img id="uploadedImage" src="#" alt="Image sélectionnée">
-				</div>
+				<label type="button" class="NewPic" id="addNewPic">
+					<img class="iconeAdd" src="./assets/icons/picture-svgrepo-com 1.png" alt="">
+					<!-- Input img  -->
+					<input type="file" id="fileInput" accept="image/*" style="display: none;">
+					<p class="addPic">+ Ajouter photo<p>
+					<div id="imageContainer" style="display: none;">
+						<img id="uploadedImage" src="#" alt="Image sélectionnée">
+						<input id="form-image" type="file" name="image" accept="image/*, .jpg, .jpeg, .png">
+					</div>
 
-				<p class="pAdd">jpg,png: 4mo max</p>
+					<p class="pAdd">jpg,png: 4mo max</p>
+				</label>
 			</div>
 			
 			<div class="inputAll">
 				<div class="inputModal2">
 					<label for="name">Titre</label>
+					<p class="failTextHide">veuillez saisir un titre</p>
           			<input type="text" name="Titre" id="titrePhoto" />
 				</div>
 
@@ -161,8 +167,8 @@
 				</div>
 			</div>
 
-		  <button class="btnVal">Valider</button>
-		</div>
+		  <button type="submit" class="btnVal">Valider</button>
+		</form>
 		
 	</div>
 </aside>

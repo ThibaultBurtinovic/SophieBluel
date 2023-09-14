@@ -453,6 +453,15 @@ margin-left: 57px;
 	margin-bottom: 46px;
 }
 
+.backgroundClose{
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	cursor: pointer;
+	z-index: -1;
+}
 
 
 .hideModal{
@@ -589,17 +598,9 @@ margin-left: 57px;
 	margin-bottom: 6px;
 }
 
-.addModal button{
-	border: none;
-	color: #306685;
-	background: #CBD6DC;
-	border-radius: 50px;
-	padding: 10px 33px;
-	margin-bottom: 7px;
-}
-
-.addModal p{
+.pAdd{
 	font-size: 10px;
+	
 }
 
 .inputModal2{
@@ -633,6 +634,21 @@ margin-left: 57px;
 	margin: 32px;
 }
 
+.addPic{
+	color: #306685;
+	background-color: #CBD6DC;
+	padding: 10px 33px;
+	border-radius: 50px;
+	margin-bottom: 7px;
+}
+
+
+.NewPic{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
 
 
 .btnVal{
@@ -661,4 +677,14 @@ margin-left: 57px;
 	object-fit: cover;
 	margin: 0;
 	padding-top: 3px;
+}
+
+
+.failTextHide{
+	display: none;
+}
+
+
+.failText{
+	color: rgba(255, 0, 0, 0.733);
 }
