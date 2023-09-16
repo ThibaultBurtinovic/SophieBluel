@@ -1,15 +1,18 @@
+import { addImg, removeImg } from "./script.js";
+import { apiBase, apiUrl } from "./config.js";
 
-    if (token) {
-      enableModal();
-      removeModal();
-      openModal2();
-      returnAndCloseModal2();
-      openNewPic();
-      BtnValider()
-    } else {
-      sessionStorage.removeItem("token");
-    }
- 
+let token = sessionStorage.getItem("token");
+if (token) {
+  enableModal();
+  removeModal();
+  openModal2();
+  returnAndCloseModal2();
+  openNewPic();
+  BtnValider();
+} else {
+  sessionStorage.removeItem("token");
+}
+
 function enableModal() {
   const boutons = document.querySelectorAll(".btnModif");
   const elements = document.querySelectorAll(".hideModal");
@@ -53,7 +56,6 @@ function removeModal() {
           modalElement.classList.remove("modal2");
           modalElement.classList.add("hideModal2");
         }
-
         modalElement.removeAttribute("aria-modal");
         modalElement.setAttribute("aria-hidden", "true");
       }
@@ -89,7 +91,7 @@ function modalDelete(data) {
   for (let i = 0; i < data.length; i++) {
     const imageUrl = data[i].imageUrl;
     const title = data[i].title;
-    const categoryId = data[i].category.id;
+    const categoryId = data[i].categoryId || data[i].category.id;
     const id = data[i].id;
 
     const figureElement = document.createElement("figure");
@@ -105,8 +107,6 @@ function modalDelete(data) {
     trashImgElement.src = "./assets/icons/trash-can-solid.svg";
     trashImgElement.alt = "trash";
 
-    
-
     // Ajouter l'attribut data-id à trashImgElement
     trashImgElement.setAttribute("data-id", id);
     const galleryArticle = document.querySelector(".galleryModal");
@@ -115,12 +115,12 @@ function modalDelete(data) {
     figureElement.appendChild(trashImgElement);
 
     trashImgElement.addEventListener("click", (event) => {
-      event.preventDefault(); 
+      event.preventDefault();
       event.stopPropagation();
       const clickedId = trashImgElement.getAttribute("data-id");
 
       // Envoyer une requête pour retirer la figure
-      fetch(`http://localhost:5678/api/works/${clickedId}`, {
+      fetch(`${apiUrl}/${clickedId}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -129,7 +129,7 @@ function modalDelete(data) {
         if (response.ok) {
           // Supprimer la figure de l'interface
           figureElement.remove();
-          removeFigureByClass(visible)
+          removeImg(id);
         } else {
           console.error("Erreur lors de la suppression de la figure.");
         }
@@ -143,7 +143,6 @@ function openModal2() {
 
   boutons.forEach((bouton, index) => {
     bouton.addEventListener("click", () => {
-      // Prevent the default behavior of the button click, which may submit a form
       const modal2 = document.querySelector(".hideModal2");
       const modal = document.querySelector(".modal");
 
@@ -187,7 +186,6 @@ function returnAndCloseModal2() {
         modalElement.classList.add("hideModal2");
         modalElement.removeAttribute("aria-modal");
         modalElement.setAttribute("aria-hidden", "true");
-
         modal.classList.remove("hideModal");
         modal.classList.add("modal");
       }
@@ -228,15 +226,13 @@ function openNewPic() {
   });
 }
 
-function addFigureToApi() {
+async function addFigureToApi() {
+  
   var title = document.getElementById("titrePhoto").value;
   var category = document.getElementById("choix").value;
-  var imageFileInput = document.getElementById("fileInput"); 
-  var imageFile = imageFileInput.files[0]; 
+  var imageFileInput = document.getElementById("fileInput");
+  var imageFile = imageFileInput.files[0];
 
-  console.log(title);
-  console.log(category);
-  console.log(imageFile);
 
   if (!imageFile) {
     alert("Veuillez sélectionner une image.");
@@ -246,69 +242,120 @@ function addFigureToApi() {
   var formData = new FormData();
   formData.append("title", title);
   formData.append("category", category);
-  formData.append("image", imageFile); 
+  formData.append("image", imageFile);
 
-  var token = sessionStorage.getItem("token");
+  await doPost(formData);
+}
 
+function doPost(formData) {
   if (!token) {
-    alert("Le jeton d'authentification est introuvable. Veuillez vous connecter.");
+    alert(
+      "Le jeton d'authentification est introuvable. Veuillez vous connecter."
+    );
     return;
   }
-
-  var headers = new Headers({
-    "Authorization": `Bearer ${token}`,
-  });
-
-  fetch("http://localhost:5678/api/works", {
-    method: "POST",
-    body: formData, 
-    headers: headers,
+  
+  axios({
+    method: "post",
+    url: apiUrl,
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    data: formData,
   })
-    .then(function (data) {
-      addImg([data]);
-      if (!response.ok) {
-        throw new Error("Réponse du serveur non valide");
-      }
-      console.log(response);
-      return response.json();
+    .then((response) => {
+      addImg([response.data]);
+      modalDelete([response.data]);
+      refreshModalAfterPost();
     })
-    .catch(function (error) {
+    .catch((error) => {
       console.error("Erreur côté client : " + error.message);
     });
 }
 
-function BtnValider() {
+async function BtnValider() {
   const validerButton = document.querySelector(".btnVal");
   const form = document.getElementById("formAdd");
   const titreInput = document.getElementById("titrePhoto");
   const failTextHide = document.querySelector(".failTextHide");
   const failText = document.querySelector(".failText");
 
-  form.addEventListener("submit", function (event) {
+  form.addEventListener("submit", async (event) => {
     event.preventDefault();
-    
-    // Vérifier si l'input a une valeur
     if (titreInput.value.trim() !== "") {
       // Changer la classe de modal2 en hideModal2
       var modal2 = document.querySelector(".modal2");
-      modal2.classList.remove("modal2");
-      modal2.classList.add("hideModal2");
+      if (modal2) {
+        modal2.classList.remove("modal2");
+        modal2.classList.add("hideModal2");
+      }
 
       // Changer la classe de hideModal en modal
       var hideModal = document.querySelector(".hideModal");
-      hideModal.classList.remove("hideModal");
-      hideModal.classList.add("modal");
+      if (hideModal) {
+        hideModal.classList.remove("hideModal");
+        hideModal.classList.add("modal");
+      }
 
       // Appeler la fonction addFigureToApi uniquement si titreInput n'est pas vide
-      addFigureToApi();
-      
-      failText.classList.remove("failText");
-      failText.classList.add("failTextHide");
+      await addFigureToApi();
+
+      // Vérifier si failText et failTextHide existent avant de modifier leurs classes
+      if (failText) {
+        failText.classList.remove("failText");
+        failText.classList.add("failTextHide");
+      }
+      if (failTextHide) {
+        failTextHide.classList.remove("failTextHide");
+        failTextHide.classList.add("failText");
+      }
     } else {
-      failTextHide.classList.remove("failTextHide");
-      failTextHide.classList.add("failText");
+      // Vérifier si failText et failTextHide existent avant de modifier leurs classes
+      if (failTextHide) {
+        failTextHide.classList.remove("failTextHide");
+        failTextHide.classList.add("failText");
+      }
     }
   });
 }
 
+function refreshModalAfterPost() {
+  const imageContainer = document.getElementById("imageContainer");
+  const titrePhoto = document.getElementById("titrePhoto");
+  const choix = document.getElementById("choix");
+  const addPic = document.querySelector(".addPic");
+  const formPic = document.getElementById("form-image");
+  const pAdd = document.querySelector(".pAdd");
+  const iconeAdd = document.querySelector(".iconeAdd");
+  const failText = document.querySelector(".failText");
 
+  if (imageContainer) {
+    imageContainer.style.display =
+      imageContainer.style.display === "none" ? "block" : "none";
+  }
+
+  if (addPic) {
+    addPic.style.display = addPic.style.display === "none" ? "block" : "none";
+  }
+
+  if (formPic) {
+    formPic.style.display = formPic.style.display === "none" ? "block" : "none";
+  }
+
+  if (pAdd) {
+    pAdd.style.display = pAdd.style.display === "none" ? "block" : "none";
+  }
+
+  if (iconeAdd) {
+    iconeAdd.style.display =
+      iconeAdd.style.display === "none" ? "block" : "none";
+  }
+
+  if (failText) {
+    failText.classList.remove("failText");
+    failText.classList.add("failTextHide");
+  }
+
+  titrePhoto.value = "";
+  choix.value = "";
+}

@@ -511,6 +511,7 @@ margin-left: 57px;
 	font-family: "Syne";
 	font-weight: 700;
 	padding: 10px 46px;
+	margin-bottom: 45px;
 }
 
 .galleryModal{
@@ -527,15 +528,18 @@ margin-left: 57px;
 
 .figuresModalImg{
 	height: 102px;
+	z-index: 1;
+	margin-right: -30px;
 }
 
 .trash{
-	position: absolute;
-	transform: translateX(-30px);
+	z-index: 2;
 	background-color: #000;
+	transform: translateY(-70px);
 	padding: 4px;
 	margin: 6px;
 	border-radius: 2px;
+	cursor: pointer;
 }
 
 /* Modal 2 */

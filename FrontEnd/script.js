@@ -1,3 +1,5 @@
+import { apiUrl } from "./config.js";
+
 // Utilisation de la fonction fetch pour récupérer des données
 fetch(apiUrl)
   .then((response) => {
@@ -16,15 +18,17 @@ fetch(apiUrl)
   });
 
 //Function add data (img et texte)
-function addImg(data) {
+export function addImg(data) {
   for (let i = 0; i < data.length; i++) {
     const imageUrl = data[i].imageUrl;
     const title = data[i].title;
-    const categoryId = data[i].category.id;
+    const categoryId = data[i].categoryId || data[i].category.id;
+    const id = data[i].id;
 
     const figureElement = document.createElement("figure");
     figureElement.classList.add("visible");
     figureElement.dataset.categoryId = categoryId;
+    figureElement.id = id;
     const imgElement = document.createElement("img");
     imgElement.src = imageUrl;
     const figcaptionElement = document.createElement("figcaption");
@@ -35,6 +39,12 @@ function addImg(data) {
     figureElement.appendChild(imgElement);
     figureElement.appendChild(figcaptionElement);
   }
+}
+
+export function removeImg(id) {
+  // supprimer du DOM l'image qui a pour id
+  const element = document.getElementById(id);
+  element.remove();
 }
 
 // Création des filtres

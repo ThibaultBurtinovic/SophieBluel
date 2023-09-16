@@ -1,17 +1,16 @@
+import { apiBase } from "./config.js";
+
 function login(email, password) {
     // authentifier l'utilisateur
-    fetch("http://localhost:5678/api/users/login", {
-      method: "POST",
+    axios.post(apiBase + "/users/login", { email, password }, {
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({ email, password })
     })
-      .then(response => response.json())
-      .then(data => {
-        if (data.token) {
+      .then(response => {
+        if (response.data.token) {
           // Stocker le token
-          sessionStorage.setItem("token", data.token);
+          sessionStorage.setItem("token", response.data.token);
           // Rediriger vers la page d'accueil
           window.location.href = "index.html";
         } else {
