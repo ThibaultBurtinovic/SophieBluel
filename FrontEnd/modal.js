@@ -8,7 +8,7 @@ if (token) {
   openModal2();
   returnAndCloseModal2();
   openNewPic();
-  BtnValider();
+  sendWithBtnValider();
 } else {
   sessionStorage.removeItem("token");
 }
@@ -63,7 +63,7 @@ function removeModal() {
   });
 }
 
-// Vérifier le token avant de continuer
+
 fetch(apiUrl, {
   method: "GET",
   headers: {
@@ -273,7 +273,7 @@ function doPost(formData) {
     });
 }
 
-async function BtnValider() {
+async function sendWithBtnValider() {
   const validerButton = document.querySelector(".btnVal");
   const form = document.getElementById("formAdd");
   const titreInput = document.getElementById("titrePhoto");
@@ -284,14 +284,14 @@ async function BtnValider() {
     event.preventDefault();
     if (titreInput.value.trim() !== "") {
       // Changer la classe de modal2 en hideModal2
-      var modal2 = document.querySelector(".modal2");
+      let modal2 = document.querySelector(".modal2");
       if (modal2) {
         modal2.classList.remove("modal2");
         modal2.classList.add("hideModal2");
       }
 
       // Changer la classe de hideModal en modal
-      var hideModal = document.querySelector(".hideModal");
+      let hideModal = document.querySelector(".hideModal");
       if (hideModal) {
         hideModal.classList.remove("hideModal");
         hideModal.classList.add("modal");
