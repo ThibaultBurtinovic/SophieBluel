@@ -344,6 +344,8 @@ footer{
 	display: none;
 }
 
+header li
+
 /* Bandeau édition */
 .edit{
 	display: flex;
@@ -414,6 +416,8 @@ margin-left: 57px;
 	border: none;
 	background: none;
 	cursor: pointer;
+	text-decoration: none;
+	color: black;
 	font-family: "Work Sans";
 	font-size: 14px;
 	padding: 0%;
@@ -427,9 +431,15 @@ margin-left: 57px;
 	height: 15px;
 }
 
-#hideEdit{
+
+#hideEdit2{
 	display: none;
 }
+#hideEdit3{
+	display: none;
+}
+
+
 
 /* Modal 1 */
 .modal{

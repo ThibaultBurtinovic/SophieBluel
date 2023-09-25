@@ -9,33 +9,24 @@
 	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
 	<meta name="description" content="">
 	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-	<script defer type="module" src="./config.js"></script>
-	<script defer type="module" src="./script.js"></script>
-	<script defer type="module" src="./logIndex.js"></script>
-	<script defer type="module" src="./modal.js "></script>
+	<script type="module" src="./config.js"></script>
+	<script type="module" src="./script.js"></script>
+	<script type="module" src="./logIndex.js"></script>
+	<script type="module" src="./modal.js "></script>
 	<link rel="stylesheet" href="./assets/style.css">
 </head>
 <body>
-	<!-- Bandeau édition -->
-	<div class="edit" id="hideEdit">
-		<div class="editText">
-			<img src="./assets/icons/noun-edit-6047259.png" alt="edit">
-			<p>Mode édition</p>
-		</div>
-		<button>publier les changements</button>
-	</div>
-
 
 <header>
 	<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
 	<nav>
 		<ul>
-			<li>projets</li>
-			<li>contact</li>
-			<a href="login.html" class="log"><li>login</li></a>
-			<a href="#" class="hideLog" id="logOut"><li>logout</li></a>
+			<li><a href="#">projets</a></li>
+			<li><a href="#">contact</a></li>
+			<li class="log"><a href="login.html">login</a></li>
+			<li><a href="#" class="hideLog" id="logOut">logout</a></li>
 			<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
-		</ul>
+		  </ul>
 	</nav>
 </header>
 <main>
@@ -43,7 +34,7 @@
 		<figure>
 			<img class="imgIntro" src="./assets/images/sophie-bluel.png" alt="">
 			<!-- modifier -->
-			<div class="otherEdit" id="hideEdit">
+			<div class="otherEdit" id="hideEdit2">
 				<img src="./assets/icons/noun-edit-6047259.png" alt="edit">
 				<p>modifier</p>
 			</div>
@@ -62,9 +53,9 @@
 		<div class="projectTitle">
 			<h2>Mes Projets</h2>
 		<!-- modifier -->
-			<div class="otherEditProject" id="hideEdit">
+			<div class="otherEditProject" id="hideEdit3">
 				<img src="./assets/icons/noun-edit-6047259.png" alt="edit">
-				<a href="#modal1"><button class="btnModif">modifier</button></a>
+				<a href="#modal1" class="btnModif">modifier</a>
 			</div>
 		</div>
 		
@@ -74,8 +65,6 @@
 			<button class="Objets" id="1">Objets</button>
 			<button class="Appartements" id="2">Appartements</button>
 			<button class="HotelsRestaurants" id="3">Hôtels & Restaurants</button>
-			
-
 		</div>
 
 		<div class="gallery">
@@ -107,7 +96,7 @@
 </footer>
 
 
-<aside id="modal1" class="hideModal" aria-hidden="true" role="gestion" aria-labelledby="titlemodal">
+<aside id="modal1" class="hideModal" aria-hidden="true">
 	<div class="backgroundClose"></div>
 	<div class="modalWrapper">
 			<a href="#" class="croix"><img src="./assets/icons/noun-x-2222031.png" alt="x"></a>
@@ -124,7 +113,7 @@
 </aside>
 
 
-<aside id="modal2" class="hideModal2" aria-hidden="true" role="gestion" aria-labelledby="titlemodal">
+<aside id="modal2" class="hideModal2" aria-hidden="true">
 	<div class="modalWrapper2">
 		<div class="backgroundClose"></div>
 		<div class="iconesModal2">
@@ -136,18 +125,17 @@
 			<h2 class="h2Modal2">Ajout photo</h2>
 
 			<div class="addModal">
-				<label type="button" class="NewPic" id="addNewPic">
-					<img class="iconeAdd" src="./assets/icons/picture-svgrepo-com 1.png" alt="">
-					<!-- Input img  -->
+				<label class="NewPic" id="addNewPic">
+					<img class="iconeAdd" src="./assets/icons/picture-svgrepo-com1.png" alt="">
+					<!-- Input img -->
 					<input type="file" id="fileInput" accept="image/*" style="display: none;">
-					<p class="addPic">+ Ajouter photo<p>
-					<div id="imageContainer" style="display: none;">
-						<img id="uploadedImage" src="#" alt="Image sélectionnée">
-						<input id="form-image" type="file" name="image" accept="image/*, .jpg, .jpeg, .png">
-					</div>
-
-					<p class="pAdd">jpg,png: 4mo max</p>
+					<span class="addPic">+ Ajouter photo</span>
 				</label>
+				<span id="imageContainer" style="display: none;">
+					<img id="uploadedImage" src="#" alt="Image sélectionnée">
+					<input id="form-image" type="file" name="image" accept="image/*, .jpg, .jpeg, .png">
+				</span>
+				<span class="pAdd">jpg, png : 4mo max</span>
 			</div>
 			
 			<div class="inputAll">
@@ -160,7 +148,7 @@
 				<div class="inputModal2">
 		  			<label for="name" >Catégorie</label>
           			<select id="choix" name="choix">
-						<option value="0"></option>
+						<option value="0">...</option>
   						<option value="1">Objets</option>
   						<option value="2">Appartements</option>
   						<option value="3">Hôtels & Restaurants</option>

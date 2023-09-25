@@ -13,16 +13,16 @@
     <meta name="login" content="" />
     <link rel="stylesheet" href="./assets/style.css" />
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script type="module" defer src="login.js"></script>
+    <script type="module" src="login.js"></script>
   </head>
   <body>
     <header>
       <h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
       <nav>
         <ul>
-          <a href="index.html"><li>projets</li></a>
+          <li><a href="index.html">projets</a></li>
           <li>contact</li>
-          <a href="login.html"><li>login</li></a>
+          <li><a href="login.html">login</a></li>
           <li><img src="./assets/icons/instagram.png" alt="Instagram" /></li>
         </ul>
       </nav>
@@ -32,15 +32,18 @@
       <h2>Log In</h2>
       <div class="formEmail">
         <form action="#" method="post">
-          <label for="name">E-mail</label>
-          <input type="text" name="email" id="email"/>
+          <label for="email">E-mail</label>
+          <input type="text" name="email" id="email" />
         </form>
       </div>
       <div class="formMdp">
         <form action="#" method="post">
-          <label for="name">Mot de passe</label>
+          <label for="password">Mot de passe</label>
           <input type="password" name="password" id="password" />
-          <label class="hide" id="textLoginFail">L'authentification a échoué. Vérifiez votre e-mail et votre mot de passe</label>
+          <label class="hide" id="textLoginFail"
+            >L'authentification a échoué. Vérifiez votre e-mail et votre mot de
+            passe</label
+          >
         </form>
       </div>
       <div class="btnLogin">
@@ -49,16 +52,12 @@
       <a href="#" class="mdpForget">Mot de passe oublié</a>
     </main>
 
-
     <footer>
-        <nav>
-            <ul>
-                <li>Mentions Légales</li>
-            </ul>
-        </nav>
+      <nav>
+        <ul>
+          <li>Mentions Légales</li>
+        </ul>
+      </nav>
     </footer>
-
-
   </body>
 </html>
-

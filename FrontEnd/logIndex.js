@@ -42,9 +42,14 @@ function hideFilters() {
 }
 
 function enableEditMode() {
-  const elementsToChange = document.querySelectorAll('[id="hideEdit"]');
+  const elementsToChange2 = document.querySelectorAll('[id="hideEdit2"]');
+  const elementsToChange3 = document.querySelectorAll('[id="hideEdit3"]');
 
-  elementsToChange.forEach((element) => {
+  elementsToChange2.forEach((element) => {
+    element.id = "enableEdit";
+  });
+
+  elementsToChange3.forEach((element) => {
     element.id = "enableEdit";
   });
 }

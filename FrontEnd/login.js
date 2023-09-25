@@ -1,27 +1,33 @@
 import { apiBase } from "./config.js";
 
 function login(email, password) {
-    // authentifier l'utilisateur
-    axios.post(apiBase + "/users/login", { email, password }, {
-      headers: {
-        "Content-Type": "application/json"
-      },
+  fetch(apiBase + "/users/login", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ email, password }),
+  })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error("Erreur côté serveur : " + response.status);
+      }
+      return response.json();
     })
-      .then(response => {
-        if (response.data.token) {
-          // Stocker le token
-          sessionStorage.setItem("token", response.data.token);
-          // Rediriger vers la page d'accueil
-          window.location.href = "index.html";
-        } else {
-          // Afficher un message d'erreur si l'authentification a échoué
-          failLogin();
-        }
-      })
-      .catch(error => {
-        console.error("Erreur lors de l'authentification:", error);
-        alert("Problème de serveur : Veuillez réessayer plus tard.");
-      });
+    .then(data => {
+      if (data.token) {
+        // Stocker le token
+        sessionStorage.setItem("token", data.token);
+        // Rediriger vers la page d'accueil
+        window.location.href = "index.html";
+      } else {
+        // Afficher un message d'erreur si l'authentification a échoué
+        failLogin();
+      }
+    })
+    .catch(error => {
+      failLogin();
+    });
   }
   
   // Sélectionner le bouton SE CONNECTER

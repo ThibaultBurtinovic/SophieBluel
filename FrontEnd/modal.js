@@ -244,7 +244,8 @@ async function addFigureToApi() {
   formData.append("category", category);
   formData.append("image", imageFile);
 
-  await doPost(formData);
+    
+  doPost(formData);
 }
 
 function doPost(formData) {
@@ -255,17 +256,22 @@ function doPost(formData) {
     return;
   }
   
-  axios({
-    method: "post",
-    url: apiUrl,
+  fetch(apiUrl, {
+    method: "POST",
     headers: {
       Authorization: `Bearer ${token}`,
     },
-    data: formData,
+    body: formData,
   })
     .then((response) => {
-      addImg([response.data]);
-      modalDelete([response.data]);
+      if (!response.ok) {
+        throw new Error("Erreur côté serveur : " + response.status);
+      }
+      return response.json();
+    })
+    .then((data) => {
+      addImg([data]);
+      modalDelete([data]);
       refreshModalAfterPost();
     })
     .catch((error) => {
